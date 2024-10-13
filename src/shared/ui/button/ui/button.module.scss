@@ -1,0 +1,26 @@
+.button {
+	background-color: #ffd626;
+	color: #004;
+	padding: 10px 30px;
+	display: inline-block;
+	position: relative;
+	border: 1px solid transparent;
+	z-index: 1;
+
+	&:hover {
+		color: white;
+	}
+
+	&::after {
+		background-color: #001232;
+		content: "";
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		height: 0;
+		transition: .2s height;
+		z-index: -1;
+		box-sizing: border-box;
+	}
+}
