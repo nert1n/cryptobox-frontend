@@ -1,21 +1,8 @@
 @import url("./base/nule.scss");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-body {
-	font-family: montserrat,sans-serif;
-}
-
-.red {
-	background-color: red;
-	color: white;
-}
-
-.black {
-	background-color: black;
-  color: white;
-}
-
-.green {
-	background-color: green;
-	color: white;
+html {
+	background: linear-gradient(0deg, #28263c, #28263c), #272637;
+	font-size: 14px;
+	color: #fff;
+	font-family: "Gilroy Regular", sans-serif;
 }
