@@ -1,5 +1,4 @@
 .burger {
-  z-index: 2;
   position: relative;
   height: 24px;
   width: 22px;
@@ -15,9 +14,10 @@
 		height: 42px;
 		width: 45px;
 		transition: all 0.1s ease 0s;
+		z-index: 20;
 
 		&.active {
-			background-color: #1f1e2f;
+			background-color: #0a1016;
 		}
 	}
 
@@ -58,14 +58,6 @@
       top: 10px;
     }
 
-		.burger__container {
-			background-color: transparent;
-      border-radius: 0;
-      height: 30px;
-      width: 30px;
-      transition: background-color 0.2s ease 0s;
-		}
-
     &::after {
       transform: rotate(-45deg);
       bottom: 10px;
@@ -75,4 +67,55 @@
       transform: scale(0);
     }
   }
+}
+
+.nav {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background-color: rgb(14 17 19 / 65%);
+	top: 0;
+	right: 0;
+	z-index: 10;
+
+	&.active {
+		display: block;
+	}
+
+	&__menu {
+		width: 100%;
+		max-width: 320px;
+		background-color: #0a1016;
+		box-shadow: 0 0 20px 0 rgb(0 0 0 / 60%);
+		border: 1px solid #25303a;
+		border-radius: 4px;
+		transition: transform 0.05s ease;
+		margin: 70px auto 0;
+		padding: 40px 20px 20px;
+	}
+
+	&.active &__button {
+		right: 0;
+		opacity: 1;
+	}
+
+	&__button {
+		color: white;
+
+		&::before {
+			filter: drop-shadow(0 0 15px #66bcff);
+			position: absolute;
+			bottom: 0;
+			transition: 0.5s;
+			left: 0;
+			height: 2px;
+			background: linear-gradient(90deg, #66bcff 7.65%, #66f 100%);
+			content: "";
+		}
+
+		&::after {
+
+		}
+	}
 }

@@ -1,9 +1,8 @@
 import Layout from "@app/layout";
 import { MainLayout } from "@app/layout/mainLayout";
+import { CasePage } from "@pages/case";
 import { FaqPage } from "@pages/faq";
 import { MainPage } from "@pages/main";
-import { SignInPage } from "@pages/sign-in";
-import { SignUpPage } from "@pages/sign-up";
 
 export const routes = [
 	{
@@ -23,12 +22,8 @@ export const routes = [
 						element: <FaqPage />,
 					},
 					{
-						path: "sign-in",
-						element: <SignInPage />,
-					},
-					{
-						path: "sign-up",
-						element: <SignUpPage />,
+						path: "case/:id",
+						element: <CasePage />,
 					},
 				],
 			},
