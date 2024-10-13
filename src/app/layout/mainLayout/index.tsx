@@ -5,10 +5,12 @@ import { Header } from "@widgets/header";
 
 export const MainLayout = () => {
 	return (
-		<div>
+		<>
 			<Header />
-			<Outlet />
+			<main>
+				<Outlet />
+			</main>
 			<Footer />
-		</div>
+		</>
 	);
 };

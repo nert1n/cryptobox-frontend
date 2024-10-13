@@ -1,0 +1,37 @@
+.header {
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 66px;
+	top: 0;
+	left: 0;
+	z-index: 30;
+	box-shadow: 0 8px 20px 4px #1f1e2f;
+	padding: 0 15px;
+
+	&__image {
+		width: 50px;
+	}
+
+	&__button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 180px;
+		height: 45px;
+		color: white;
+		font-size: 12px;
+		font-weight: 600;
+		border-radius: 5px;
+		background: linear-gradient(90deg, #6255ff 3.89%, #68b9ff 100%);
+		filter: drop-shadow(0 0 15px #6255ff50);
+		gap: 8px;
+		transition: 0.5s;
+
+		&:hover {
+			filter: drop-shadow(0 0 15px #6255ff70) drop-shadow(0 0 15px #6255ff70);
+		}
+	}
+}

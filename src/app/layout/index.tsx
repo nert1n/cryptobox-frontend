@@ -6,11 +6,9 @@ import Providers from "@app/providers";
 const Layout = () => {
 	return (
 		<Providers>
-			<main>
-				<Suspense fallback={<div>Loading...</div>}>
-					<Outlet />
-				</Suspense>
-			</main>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Outlet />
+			</Suspense>
 		</Providers>
 	);
 };
