@@ -1,0 +1,83 @@
+.cup {
+	margin: 15px 5px;
+	width: 180px;
+	background: url("/images/lvls.png") no-repeat;
+	position: relative;
+
+	&.active {
+		&::before {
+			opacity: 1;
+		}
+	}
+
+	&::before {
+		width: 30px;
+		height: 30px;
+		background: url("/images/act.png") no-repeat;
+		position: absolute;
+		top: -18px;
+		background-size: cover;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		content: "";
+		transition: 0.5s;
+		opacity: 0;
+	}
+
+	&__level {
+		background: linear-gradient(90deg, #68bdff 0%, #6868ff 100%);
+		border-radius: 100px;
+		width: 120px;
+		height: 45px;
+		display: -webkit-box;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		font-size: 16px;
+		letter-spacing: 0.05em;
+		position: relative;
+		margin: 27px auto 40px;
+
+		span {
+			position: absolute;
+			top: -15px;
+			background: url("/images/ico-5.png") no-repeat;
+			background-size: contain;
+			width: 26px;
+			height: 30px;
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			font-size: 16px;
+			letter-spacing: 0.05em;
+			color: #000;
+		}
+	}
+
+	&__text {
+		font-weight: 600;
+		text-align: center;
+		letter-spacing: 0.05em;
+		color: #6c6989;
+		padding: 0 20px;
+	}
+
+	&__description {
+		color: #5b5a73;
+		font-weight: 600;
+		text-align: center;
+		font-size: 12px;
+		letter-spacing: 0.05em;
+		margin-top: 10px;
+	}
+}

@@ -3,6 +3,8 @@ import { MainLayout } from "@app/layout/mainLayout";
 import { CasePage } from "@pages/case";
 import { FaqPage } from "@pages/faq";
 import { MainPage } from "@pages/main";
+import { ProfilePage } from "@pages/profile";
+import { ReferralPage } from "@pages/referral";
 
 export const routes = [
 	{
@@ -20,6 +22,14 @@ export const routes = [
 					{
 						path: "faq",
 						element: <FaqPage />,
+					},
+					{
+						path: "user/:id",
+						element: <ProfilePage />,
+					},
+					{
+						path: "referral",
+						element: <ReferralPage />,
 					},
 					{
 						path: "case/:id",
