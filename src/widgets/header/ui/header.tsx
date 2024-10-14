@@ -11,7 +11,7 @@ export const Header = () => {
 				<img
 					alt="Logo mobile"
 					className={styles.header__image}
-					src="/logo-mobile.png"
+					src="/images/logo-mobile.png"
 				/>
 			</Link>
 			<Link className={styles.header__button} to={"sign-in"}>

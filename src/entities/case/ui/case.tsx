@@ -13,8 +13,16 @@ export const Case = ({
 }) => {
 	return (
 		<Link className={styles.case} to={`case/${link}`}>
-			{name}
-			{cost}
+			<div className={styles["case-in"]}>
+				<p className={styles["case-hover"]}></p>
+				<div className={styles["case-price"]}>
+					<b>${cost}.00</b>
+				</div>
+				<div className={styles["case-images"]}>
+					<img alt={name} src={`/images/cases/${link}.png`} />
+				</div>
+				<div className={styles["case-name"]}>{name}</div>
+			</div>
 		</Link>
 	);
 };

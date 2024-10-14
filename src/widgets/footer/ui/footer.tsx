@@ -3,7 +3,11 @@ import styles from "./footer.module.scss";
 export const Footer = () => {
 	return (
 		<div className={styles.footer}>
-			<img alt="Site logo" className={styles.footer__image} src="/logo.png" />
+			<img
+				alt="Site logo"
+				className={styles.footer__image}
+				src="/images/logo.png"
+			/>
 			<p className={styles.footer__terms}>
 				© 2024 CryptoDrop — ловите криптовалюту с неба{" "}
 			</p>

@@ -25,7 +25,7 @@ const CASES = [
 		id: 4,
 		cost: 15,
 		name: "PTP",
-		link: "ptp",
+		link: "p2p",
 	},
 	{
 		id: 5,
