@@ -14,7 +14,6 @@ export const Case = ({
 	return (
 		<Link className={styles.case} to={`case/${link}`}>
 			<div className={styles["case-in"]}>
-				<p className={styles["case-hover"]}></p>
 				<div className={styles["case-price"]}>
 					<b>${cost}.00</b>
 				</div>
