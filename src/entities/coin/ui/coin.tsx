@@ -10,8 +10,7 @@ export const Coin = ({
 	coinName,
 }: ICoin) => {
 	return (
-		<div
-			className={`${styles.coin} ${coinColor ? styles[`${coinColor}`] : ""}`}>
+		<div className={`${styles.coin} ${coinColor ? styles[coinColor] : ""}`}>
 			<p className={styles.coin__cost}>${coinCost}</p>
 			<img
 				alt="Coin"

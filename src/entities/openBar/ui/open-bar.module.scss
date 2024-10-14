@@ -1,0 +1,30 @@
+.bar {
+	margin-bottom: 25px;
+
+	&__title {
+		padding: 20px;
+		width: 100%;
+		height: auto;
+		font-size: 16px;
+		background: #1d1b2e;
+		color: #fff;
+		font-weight: 600;
+		display: -webkit-box;
+		display: flex;
+		-webkit-box-align: start;
+		align-items: start;
+		-ms-flex-align: start;
+		text-align: start;
+		position: relative;
+		cursor: pointer;
+	}
+
+	&__description {
+		padding: 20px;
+		font-size: 14px;
+		background: #1d1b2e;
+		margin-top: 1px;
+		color: #646183;
+		letter-spacing: 0.05em;
+	}
+}

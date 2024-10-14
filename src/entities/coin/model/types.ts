@@ -3,5 +3,5 @@ export interface ICoin {
 	coinCount: number;
 	coinImage: string;
 	coinName: string;
-	coinColor: "blue" | "purple";
+	coinColor: string;
 }
