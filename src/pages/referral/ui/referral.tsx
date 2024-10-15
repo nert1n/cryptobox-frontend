@@ -50,19 +50,6 @@ const refList = [
 		input: "https://cryptodrop.net/c/WYZDZVWUEU",
 		inputPlaceholder: "Реферальная ссылка",
 	},
-	{
-		name: "Ваш инвайт-код",
-		desc: "Делитесь своим кодом с друзьями и получайте бонусы за каждое их пополнение. Вы можете изменить свой инвайт-код на более удобный и запоминающийся.",
-		input: "WYZDZVWUEU",
-		button: "Save",
-		inputPlaceholder: "Твой код",
-	},
-	{
-		name: "Инвайт код друга",
-		desc: "Делитесь своим кодом с друзьями и получайте бонусы за каждое их пополнение. Вы можете изменить свой инвайт-код на более удобный и запоминающийся.",
-		button: "Activate",
-		inputPlaceholder: "Код твоего друга",
-	},
 ];
 
 const currentLevel = 1;
@@ -108,7 +95,6 @@ export const Referral = () => {
 				{refList.map(block => (
 					<ReferralBlock
 						key={block.name}
-						button={block.button}
 						desc={block.desc}
 						input={block.input}
 						inputPlaceholder={block.inputPlaceholder}
