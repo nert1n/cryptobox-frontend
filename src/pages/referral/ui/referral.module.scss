@@ -1,6 +1,155 @@
 .referral {
-	&__achivment {
-		width: min-content;
+	&__level {
+		background: url("/images/level.png") no-repeat;
+		width: 260px;
+		height: 305px;
 		margin: 0 auto;
+		display: -webkit-box;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		flex-direction: column;
+		padding-top: 50px;
+
+		&_image {
+			background: url("/images/Trophy.png") no-repeat;
+			width: 135px;
+			height: 140px;
+		}
+
+		&_holder {
+			background: linear-gradient(90deg, #68bdff 0%, #6868ff 100%);
+			border-radius: 100px;
+			width: 120px;
+			height: 45px;
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			font-size: 16px;
+			letter-spacing: 0.05em;
+			position: relative;
+			margin-top: 27px;
+			margin-bottom: 40px;
+		}
+
+		&_current {
+			position: absolute;
+			top: -15px;
+			background: url("/images/ico-5.png") no-repeat;
+			background-size: contain;
+			width: 26px;
+			height: 30px;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			font-size: 16px;
+			letter-spacing: 0.05em;
+			color: #000;
+		}
+
+		&_name {
+
+		}
+
+		&_text {
+			text-align: center;
+			font-size: 16px;
+			line-height: 19px;
+			letter-spacing: 0.05em;
+			color: #514f68;
+			max-width: 180px;
+			margin: 20px auto 40px;
+		}
+	}
+
+	&__list {
+		margin-bottom: 45px;
+
+		li p[data-span]::after {
+			content: attr(data-span);
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 38px;
+			z-index: -1;
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			font-size: 65px;
+			letter-spacing: 0.05em;
+			text-shadow: 0 0 1px #3d3a57;
+			color: #1d1b2e;
+		}
+
+		&_item {
+			margin-bottom: 16px;
+			width: 100%;
+			height: 100px;
+			background: #1d1b2e;
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			position: relative;
+
+			&::after {
+				width: 3px;
+				height: 46px;
+				background: #ffb545;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				content: "";
+				margin: auto 0;
+			}
+		}
+
+		&_title {
+			position: relative;
+			z-index: 1;
+			font-size: 28px;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			color: #ffb545;
+			min-width: 120px;
+			text-align: center;
+			box-sizing: border-box;
+		}
+
+		&_desc {
+			text-align: start;
+			font-size: 16px;
+			font-weight: 500;
+			letter-spacing: 0.05em;
+		}
+	}
+
+	&__achivment {
+		display: flex;
+		flex-direction: column;
+		width: min-content;
+		gap: 1rem;
+		margin: 0 auto 50px;
 	}
 }

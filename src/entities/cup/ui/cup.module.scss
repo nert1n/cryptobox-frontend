@@ -3,6 +3,7 @@
 	width: 180px;
 	background: url("/images/lvls.png") no-repeat;
 	position: relative;
+	padding-top: 140px;
 
 	&.active {
 		&::before {
@@ -41,7 +42,7 @@
 		font-size: 16px;
 		letter-spacing: 0.05em;
 		position: relative;
-		margin: 27px auto 40px;
+		margin: 27px auto 16px;
 
 		span {
 			position: absolute;
@@ -50,7 +51,6 @@
 			background-size: contain;
 			width: 26px;
 			height: 30px;
-			display: -webkit-box;
 			display: flex;
 			-webkit-box-align: center;
 			-ms-flex-align: center;

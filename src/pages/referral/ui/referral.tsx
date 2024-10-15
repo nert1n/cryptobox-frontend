@@ -1,4 +1,5 @@
 import { Cup } from "@entities/cup";
+import { ReferralBlock } from "@entities/referralBlock";
 import { Title } from "@shared/ui/title";
 
 import styles from "./referral.module.scss";
@@ -10,12 +11,88 @@ const referrals = [
 		percent: 2.5,
 		isGain: true,
 	},
+	{
+		level: 2,
+		count: 300,
+		percent: 3,
+		isGain: false,
+	},
+	{
+		level: 3,
+		count: 1000,
+		percent: 7,
+		isGain: false,
+	},
+	{
+		level: 4,
+		count: 2500,
+		percent: 8,
+		isGain: false,
+	},
+	{
+		level: 5,
+		count: 10000,
+		percent: 10,
+		isGain: false,
+	},
 ];
+
+const levelList = [
+	{ title: "2.5%", desc: "От пополнения", data: "%" },
+	{ title: "0", desc: "Текущих рефералов", data: "0" },
+	{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
+];
+
+const refList = [
+	{
+		name: "Ваша реферальная ссылка",
+		desc: "Делитесь своей ссылкой со всеми везде и получайте бонусы за каждое их пополнение.",
+		input: "https://cryptodrop.net/c/WYZDZVWUEU",
+		inputPlaceholder: "Реферальная ссылка",
+	},
+	{
+		name: "Ваш инвайт-код",
+		desc: "Делитесь своим кодом с друзьями и получайте бонусы за каждое их пополнение. Вы можете изменить свой инвайт-код на более удобный и запоминающийся.",
+		input: "WYZDZVWUEU",
+		button: "Save",
+		inputPlaceholder: "Твой код",
+	},
+	{
+		name: "Инвайт код друга",
+		desc: "Делитесь своим кодом с друзьями и получайте бонусы за каждое их пополнение. Вы можете изменить свой инвайт-код на более удобный и запоминающийся.",
+		button: "Activate",
+		inputPlaceholder: "Код твоего друга",
+	},
+];
+
+const currentLevel = 1;
 
 export const Referral = () => {
 	return (
 		<div className={styles.referral}>
 			<Title>Реферальная система</Title>
+			<div className={styles.referral__level}>
+				<div className={styles.referral__level_image}></div>
+				<div className={styles.referral__level_holder}>
+					<span className={styles.referral__level_current}>{currentLevel}</span>
+					<p className={styles.referral__level_name}>Уровень</p>
+				</div>
+			</div>
+			<p className={styles.referral__level_text}>
+				Достигнув этого уровня, вы получаете:{" "}
+			</p>
+			<ul className={styles.referral__list}>
+				{levelList.map(listLevel => (
+					<li key={listLevel.title} className={styles.referral__list_item}>
+						<p
+							className={styles.referral__list_title}
+							data-span={listLevel.data}>
+							{listLevel.title}
+						</p>
+						<p className={styles.referral__list_desc}>{listLevel.desc}</p>
+					</li>
+				))}
+			</ul>
 			<div className={styles.referral__achivment}>
 				{referrals.map(referrals => (
 					<Cup
@@ -24,6 +101,18 @@ export const Referral = () => {
 						isGain={referrals.isGain}
 						level={referrals.level}
 						procentReplenishment={referrals.percent}
+					/>
+				))}
+			</div>
+			<div>
+				{refList.map(block => (
+					<ReferralBlock
+						key={block.name}
+						button={block.button}
+						desc={block.desc}
+						input={block.input}
+						inputPlaceholder={block.inputPlaceholder}
+						title={block.name}
 					/>
 				))}
 			</div>
