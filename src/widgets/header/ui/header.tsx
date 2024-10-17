@@ -19,7 +19,7 @@ export const Header = () => {
 					<p>nert1n</p>
 					<p>ID: 19352</p>
 				</Link>
-				<Link className={styles.header__button_refill} to={"/faq"}>
+				<Link className={styles.header__button_refill} to={"/refill"}>
 					$0
 				</Link>
 			</div>

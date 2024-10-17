@@ -5,6 +5,7 @@ import { FaqPage } from "@pages/faq";
 import { MainPage } from "@pages/main";
 import { ProfilePage } from "@pages/profile";
 import { ReferralPage } from "@pages/referral";
+import { RefillPage } from "@pages/refill";
 
 export const routes = [
 	{
@@ -22,6 +23,10 @@ export const routes = [
 					{
 						path: "faq",
 						element: <FaqPage />,
+					},
+					{
+						path: "refill",
+						element: <RefillPage />,
 					},
 					{
 						path: "user/:id",
