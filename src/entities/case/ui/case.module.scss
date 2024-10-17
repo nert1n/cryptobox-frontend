@@ -55,15 +55,13 @@
 		}
 
 		&::after {
+			z-index: -2;
 			position: absolute;
 			inset: 0;
 			content: "";
-			background: linear-gradient(180deg, rgb(32 28 41 / 50%) 41.24%, rgb(45 43 65 / 80%) 100%);
+			background: linear-gradient(180deg, rgb(32 28 41 / 0%) 41.24%, rgb(45 43 65 / 45%) 100%);
 			border-bottom: 2px solid rgb(84 81 114 / 45%);
-			z-index: -1;
-			transition: opacity 0.5s;
-			opacity: 0;
-			height: 2px;
+			transition: 0.5s;
 		}
 	}
 
