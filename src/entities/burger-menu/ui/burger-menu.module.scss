@@ -84,6 +84,9 @@
 	}
 
 	&__menu {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		max-width: 320px;
 		background-color: #0a1016;
@@ -91,8 +94,10 @@
 		border: 1px solid #25303a;
 		border-radius: 4px;
 		transition: transform 0.05s ease;
-		margin: 70px auto 0;
 		padding: 40px 20px 20px;
+		right: 0;
+		margin: 70px 60px 0 auto;
+		gap: 10px;
 	}
 
 	&.active &__button {
@@ -101,21 +106,88 @@
 	}
 
 	&__button {
-		color: white;
+		&_link {
+			align-items: flex-start;
+			justify-content: flex-start;
+			width: max-content;
+			margin-left: 0;
+			margin-right: auto;
+			font-size: 15px;
+			font-weight: 700;
+			position: relative;
+			z-index: 1;
+			color: #46445b;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			display: -webkit-box;
+			display: flex;
+			-webkit-box-align: center;
+			height: 32px;
+			transition: all 0.2s linear;
 
-		&::before {
-			filter: drop-shadow(0 0 15px #66bcff);
-			position: absolute;
-			bottom: 0;
-			transition: 0.5s;
-			left: 0;
-			height: 2px;
-			background: linear-gradient(90deg, #66bcff 7.65%, #66f 100%);
-			content: "";
-		}
+			svg {
+				position: relative;
+				width: 32px;
+				margin-right: 10px;
 
-		&::after {
+				& stop {
+					stop-color: #46445b;
+					transition: 0.5s;
+				}
+			}
 
+			&::before {
+				filter: drop-shadow(0 0 15px #66bcff);
+				position: absolute;
+				bottom: 6px;
+				opacity: 0;
+				transition: 0.5s;
+				left: 0;
+				right: 100%;
+				height: 2px;
+				background: linear-gradient(90deg, #66bcff 7.65%, #66f 100%);
+				content: "";
+			}
+
+			&::after {
+				width: 32px;
+				height: 32px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				content: "";
+				background: url("/images/ico-2.png") no-repeat;
+				z-index: -1;
+				transition: 0.5s;
+				opacity: 0;
+			}
+
+			&.active,
+			&:hover {
+				color: white;
+
+				svg {
+					& stop {
+						&:first-child {
+							stop-color: #66C8FF;
+						}
+
+						&:last-child {
+							stop-color: #66F;
+						}
+					}
+				}
+
+				&::before {
+					opacity: 1;
+					right: 0;
+				}
+
+				&::after {
+					opacity: 1;
+				}
+			}
 		}
 	}
+
 }
