@@ -40,16 +40,6 @@ export const Refill = () => {
 		setAmount(numberValue);
 	};
 
-	const options = {
-		mode: "payment",
-		amount: 123,
-		currency: "USD",
-		payment_method_types: ["card"],
-		customer: "cus_test_4242424242424242",
-		success_url: "https://example.com/success",
-		cancel_url: "https://example.com/cancel",
-	};
-
 	return (
 		<div className={styles.refill}>
 			<Title>Пополнение баланса</Title>
@@ -89,7 +79,7 @@ export const Refill = () => {
 					данные платежа.
 				</p>
 			</div>
-			<Elements options={options} stripe={stripePromise}>
+			<Elements stripe={stripePromise}>
 				<StripeWidget />
 			</Elements>
 			{isYooMoney && <YooMoneyWidget amount={amount} />}
