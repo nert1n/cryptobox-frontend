@@ -34,9 +34,9 @@ export const Refill = () => {
 	};
 
 	return (
-		<div className={styles.faq}>
+		<div className={styles.refill}>
 			<Title>Пополнение баланса</Title>
-			<div className={styles.faq__main}>
+			<div className={styles.refill__main}>
 				<h2>Оплата через YooMoney</h2>
 				<input
 					placeholder="Введите сумму"
