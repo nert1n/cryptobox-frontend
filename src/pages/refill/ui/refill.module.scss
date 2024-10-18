@@ -61,6 +61,34 @@
 		font-weight: 400;
 		color: #b1bbca;
 	}
+
+	&__holder {
+		display: flex;
+		justify-content: start;
+		align-items: center;
+	}
+
+	&__select {
+		background-color: #141d25;
+		display: flex;
+		width: max-content;
+		align-items: center;
+		margin: 5px 10px 5px 0;
+		padding: 10px;
+		border: 2px solid transparent;
+		border-radius: 4px;
+		font-size: 13px;
+		line-height: 14px;
+		font-weight: 500;
+		color: #b1bbca;
+		transition: 0.12s ease;
+		cursor: pointer;
+
+		&.active {
+			pointer-events: none;
+			border: 2px solid #579bda;
+		}
+	}
 }
 
 .input {

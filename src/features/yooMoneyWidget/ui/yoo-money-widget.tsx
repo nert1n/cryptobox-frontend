@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { IYooMoneyWidget } from "@widgets/yooMoneyWidget/model/types.ts";
+import { IYooMoneyWidget } from "@features/yooMoneyWidget/model/types.ts";
 
 export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 	useEffect(() => {
