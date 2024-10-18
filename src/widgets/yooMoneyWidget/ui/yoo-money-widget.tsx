@@ -16,7 +16,7 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 				},
 				confirmation: {
 					type: "redirect",
-					return_url: "https://your-website.com/payment-success",
+					return_url: "https://crypto-drop-rouge.vercel.app/payment-success",
 				},
 				capture: true,
 				description: "Оплата заказа",
