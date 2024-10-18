@@ -62,7 +62,7 @@ export const Referral = () => {
 	const getReferral = async () => {
 		try {
 			const result = await UserService.postGetRef(6822709019);
-			setReferral(result.data);
+			setReferral(result.data.ref);
 		} catch (e) {
 			console.log(e);
 		}

@@ -16,9 +16,9 @@ export const ReferralBlock = ({
 			<div className={styles.block__holder}>
 				<input
 					className={styles.block__input}
-					defaultValue={input}
 					placeholder={inputPlaceholder}
 					type="text"
+					value={input}
 				/>
 				{button !== "" && (
 					<button className={styles.block__button}>{button}</button>

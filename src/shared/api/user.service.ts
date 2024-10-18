@@ -5,7 +5,7 @@ import { BACKEND_URL } from "@shared/const/originUrl/backend-url";
 export default class UserService {
 	static async postGetRef(chatId: number) {
 		const res = await axios.post(
-			`${BACKEND_URL}/getref`,
+			`${BACKEND_URL}/api/getref`,
 			{ chatId: chatId },
 			{
 				withCredentials: true,
@@ -13,10 +13,10 @@ export default class UserService {
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postCreatePostman() {
+	static async postCreatePayment(amount: number) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/createPayment`,
-			{ amount: 6822709019 },
+			{ amount: amount },
 			{
 				withCredentials: true,
 			}

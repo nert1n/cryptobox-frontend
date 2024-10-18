@@ -1,10 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./profile.module.scss";
 
 export const Profile = () => {
+	const [referral, setReferral] = useState(null);
+
+	const getReferral = async () => {
+		try {
+			const result = await UserService.postGetRef(6822709019);
+			setReferral(result.data.ref);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	useEffect(() => {
+		getReferral();
+	}, []);
+
 	return (
 		<div className={styles.profile}>
 			<Title>Профиль</Title>
@@ -54,7 +71,7 @@ export const Profile = () => {
 					<input
 						className={styles.referral__input}
 						type="text"
-						value={"https://cryptodrop.net/c/WYZDZVWUEU"}
+						value={`${referral}`}
 					/>
 					<Link className={styles.referral__link} to={"/referral"}>
 						Зарабатывать
