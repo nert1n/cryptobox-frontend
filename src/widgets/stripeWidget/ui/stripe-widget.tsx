@@ -1,39 +1,50 @@
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import { FormEvent } from "react";
+import {
+	LinkAuthenticationElement,
+	PaymentElement,
+	useElements,
+	useStripe,
+} from "@stripe/react-stripe-js";
+import { FormEvent, useState } from "react";
 
 export const StripeWidget = () => {
 	const stripe = useStripe();
 	const elements = useElements();
+	const [message, setMessage] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
 		if (!stripe || !elements) return;
 
-		const cardElement = elements.getElement(CardElement);
-		if (!cardElement) return;
+		setIsLoading(true);
 
-		const { error, paymentIntent } = await stripe.confirmCardPayment(
-			"your-client-secret",
-			{
-				payment_method: {
-					card: cardElement,
-				},
-			}
-		);
+		const { error } = await stripe.confirmPayment({
+			elements,
+			confirmParams: {
+				return_url: `${window.location.origin}/completion`,
+			},
+		});
 
 		if (error) {
-			console.error(error);
+			setMessage(error.message || "An unexpected error occurred.");
 		} else {
-			console.log(paymentIntent);
+			setMessage("Payment processed successfully.");
 		}
+
+		setIsLoading(false);
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<CardElement />
-			<button disabled={!stripe} type="submit">
-				Оплатити
+		<form id="payment-form" onSubmit={handleSubmit}>
+			<LinkAuthenticationElement id="link-authentication-element" />
+			<PaymentElement id="payment-element" />
+			<button disabled={isLoading || !stripe || !elements} id="submit">
+				<span id="button-text">
+					{isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+				</span>
 			</button>
+			{message && <div id="payment-message">{message}</div>}
 		</form>
 	);
 };

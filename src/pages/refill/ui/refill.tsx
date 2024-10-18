@@ -9,7 +9,9 @@ import { YooMoneyWidget } from "@widgets/yooMoneyWidget";
 
 import styles from "./refill.module.scss";
 
-const stripePromise = loadStripe("your-public-key");
+const stripePromise = loadStripe(
+	"sk_test_51OkRe7KsvhRur5TZI1OezYZ1cfRffOeewWByGUPRz5sAGvjQBJY07B1iueIplIXK3VzJI27u5VDGMkqS1U7X7jia002CfMo36a"
+);
 
 export const Refill = () => {
 	const [amount, setAmount] = useState(0);
@@ -36,6 +38,16 @@ export const Refill = () => {
 		const value = e.target.value;
 		const numberValue = value ? parseFloat(value) : 0;
 		setAmount(numberValue);
+	};
+
+	const options = {
+		mode: "payment",
+		amount: 123,
+		currency: "USD",
+		payment_method_types: ["card"],
+		customer: "cus_test_4242424242424242",
+		success_url: "https://example.com/success",
+		cancel_url: "https://example.com/cancel",
 	};
 
 	return (
@@ -77,7 +89,7 @@ export const Refill = () => {
 					данные платежа.
 				</p>
 			</div>
-			<Elements stripe={stripePromise}>
+			<Elements options={options} stripe={stripePromise}>
 				<StripeWidget />
 			</Elements>
 			{isYooMoney && <YooMoneyWidget amount={amount} />}

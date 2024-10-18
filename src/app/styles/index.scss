@@ -90,8 +90,6 @@ button:disabled {
 	height: 20px;
 	box-shadow: inset 0 0 0 2px;
 	transform: translateZ(0);
-	transform: translateZ(0);
-	transform: translateZ(0);
 }
 
 .spinner::before,
@@ -108,8 +106,6 @@ button:disabled {
 	top: -0.2px;
 	left: -0.2px;
 	transform-origin: 10.4px 10.2px;
-	transform-origin: 10.4px 10.2px;
-	animation: loading 2s infinite ease 1.5s;
 	animation: loading 2s infinite ease 1.5s;
 }
 
@@ -121,8 +117,6 @@ button:disabled {
 	top: -0.1px;
 	left: 10.2px;
 	transform-origin: 0 10.2px;
-	transform-origin: 0 10.2px;
-	animation: loading 2s infinite ease;
 	animation: loading 2s infinite ease;
 }
 
@@ -242,11 +236,9 @@ td {
 @keyframes loading {
 	0% {
 		transform: rotate(0deg);
-		transform: rotate(0deg);
 	}
 
 	100% {
-		transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
 }
@@ -263,3 +255,4 @@ td {
 		min-width: initial;
 	}
 }
+
