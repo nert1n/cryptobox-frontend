@@ -36,19 +36,12 @@ export default defineConfig({
 		port: 3000,
 		proxy: {
 			"/api": {
-				target: "https://api.crypto-drop.com",
+				target:
+					"https://6923-2a02-8071-6282-a220-d85b-15eb-1d34-e786.ngrok-free.app",
 				changeOrigin: true,
 				secure: true,
 				cookieDomainRewrite: "localhost",
 				rewrite: path => path.replace(/^\/api/, ""),
-			},
-			"/ws": {
-				target: "wss://api.codersbud.com",
-				ws: true,
-				rewrite: path => path.replace(/^\/ws/, "/chat"),
-				changeOrigin: true,
-				rewriteWsOrigin: true,
-				secure: true,
 			},
 		},
 		hmr: { overlay: true },

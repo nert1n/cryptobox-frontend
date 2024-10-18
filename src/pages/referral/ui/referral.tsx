@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+
 import { Cup } from "@entities/cup";
 import { ReferralBlock } from "@entities/referralBlock";
+import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./referral.module.scss";
@@ -47,7 +50,6 @@ const refList = [
 	{
 		name: "Ваша реферальная ссылка",
 		desc: "Делитесь своей ссылкой со всеми везде и получайте бонусы за каждое их пополнение.",
-		input: "https://cryptodrop.net/c/WYZDZVWUEU",
 		inputPlaceholder: "Реферальная ссылка",
 	},
 ];
@@ -55,6 +57,21 @@ const refList = [
 const currentLevel = 1;
 
 export const Referral = () => {
+	const [referral, setReferral] = useState(null);
+
+	const getReferral = async () => {
+		try {
+			const result = await UserService.postGetRef(6822709019);
+			setReferral(result.data);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	useEffect(() => {
+		getReferral();
+	}, []);
+
 	return (
 		<div className={styles.referral}>
 			<Title>Реферальная система</Title>
@@ -96,7 +113,7 @@ export const Referral = () => {
 					<ReferralBlock
 						key={block.name}
 						desc={block.desc}
-						input={block.input}
+						input={`${referral}`}
 						inputPlaceholder={block.inputPlaceholder}
 						title={block.name}
 					/>
