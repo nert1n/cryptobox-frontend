@@ -14,8 +14,6 @@ export const StripeForm = () => {
 	const [amount, setAmount] = useState(0);
 	const [isNext, setIsNext] = useState(false);
 
-	console.log(isNext);
-
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		const numberValue = value ? parseFloat(value) : 0;
@@ -40,7 +38,6 @@ export const StripeForm = () => {
 	};
 
 	const options = {
-		// passing the client secret obtained from the server
 		clientSecret: "{{CLIENT_SECRET}}",
 	};
 
@@ -80,7 +77,7 @@ export const StripeForm = () => {
 				платежа.
 			</p>
 			<Elements options={options} stripe={stripePromise}>
-				<StripeWidget />
+				{isNext && <StripeWidget />}
 			</Elements>
 		</div>
 	);

@@ -20,16 +20,11 @@
 		width: 154px;
 		height: 154px;
 		border-radius: 50%;
-		cursor: pointer;
 		display: inline-block;
 		overflow: hidden;
 		position: relative;
 		background-color: rgb(21 21 38 / 80%);
 		margin-bottom: 20px;
-
-		img {
-
-		}
 	}
 
 	&__name {
@@ -68,6 +63,11 @@
 			-webkit-box-pack: center;
 			-ms-flex-pack: center;
 			justify-content: center;
+			transition: all 0.2s;
+
+			&:hover {
+				background: #447dce;
+			}
 		}
 	}
 
@@ -141,6 +141,7 @@
 		margin-top: auto;
 		-webkit-box-align: center;
 		align-items: center;
+		cursor: pointer;
 		-ms-flex-align: center;
 		font-size: 14px;
 		font-weight: 500;
