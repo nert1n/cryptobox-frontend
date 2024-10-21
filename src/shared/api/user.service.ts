@@ -13,9 +13,19 @@ export default class UserService {
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postCreatePayment(amount: number) {
+	static async postCreatePaymentYooMoney(amount: number) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/createrubpayment`,
+			{ amount: amount },
+			{
+				withCredentials: true,
+			}
+		);
+		return { data: res.data, status: res.status, statusText: res.statusText };
+	}
+	static async postCreatePaymentStripe(amount: number) {
+		const res = await axios.post(
+			`${BACKEND_URL}/create-checkout-session`,
 			{ amount: amount },
 			{
 				withCredentials: true,

@@ -21,6 +21,7 @@ export const BurgerMenu = () => {
 					<span></span>
 				</div>
 			</button>
+			{/* eslint-disable-next-line sonarjs/mouse-events-a11y,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
 			<nav
 				className={`${styles.nav} ${isActive ? styles.active : ""}`}
 				onClick={handleChangeIsActive}>

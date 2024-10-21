@@ -27,15 +27,15 @@
 
 	&__button {
 		color: white;
-    font-size: 16px;
+		font-size: 16px;
 		font-weight: 700;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+		padding: 10px 15px;
+		border-radius: 4px;
+		transition: all 0.2s ease;
 
-    &:hover {
-	    color: #d5d5d5;
-    }
+		&:hover {
+			color: #d5d5d5;
+		}
 
 		p:last-child {
 			color: #878787;

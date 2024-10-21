@@ -23,7 +23,11 @@
 			inset: 0;
 			content: "";
 			z-index: 1;
-			background: linear-gradient(180deg, rgb(32 28 41 / 0%) 41.24%, rgb(45 43 65 / 45%) 100%);
+			background: linear-gradient(
+				180deg,
+				rgb(32 28 41 / 0%) 41.24%,
+				rgb(45 43 65 / 45%) 100%
+			);
 		}
 
 		&_holder {
@@ -110,8 +114,8 @@
 			cursor: pointer;
 
 			&:hover {
-        color: #fff;
-      }
+				color: #fff;
+			}
 
 			&.active {
 				background-color: #191829;
@@ -152,9 +156,9 @@
 			box-shadow: 0 4px 15px rgb(87 111 33);
 
 			&:hover {
-        box-shadow: 0 4px 15px rgb(130 165 52);
-      }
-    }
+				box-shadow: 0 4px 15px rgb(130 165 52);
+			}
+		}
 	}
 
 	&__holder {

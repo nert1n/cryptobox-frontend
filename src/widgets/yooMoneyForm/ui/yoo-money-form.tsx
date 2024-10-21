@@ -10,7 +10,7 @@ export const YooMoneyForm = () => {
 
 	const handlePayment = async () => {
 		try {
-			const response = await UserService.postCreatePayment(amount);
+			const response = await UserService.postCreatePaymentYooMoney(amount);
 
 			if (
 				response.data.confirmation &&
