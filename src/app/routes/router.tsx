@@ -6,6 +6,7 @@ import { MainPage } from "@pages/main";
 import { ProfilePage } from "@pages/profile";
 import { ReferralPage } from "@pages/referral";
 import { RefillPage } from "@pages/refill";
+import { SuccessPage } from "@pages/success";
 
 export const routes = [
 	{
@@ -27,6 +28,10 @@ export const routes = [
 					{
 						path: "refill",
 						element: <RefillPage />,
+					},
+					{
+						path: "refill/success",
+						element: <SuccessPage />,
 					},
 					{
 						path: "user/:id",

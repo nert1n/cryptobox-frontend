@@ -22,7 +22,7 @@ export const StripeWidget = () => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: `${window.location.origin}/completion`,
+				return_url: `${window.location.origin}/refill/success`,
 			},
 		});
 
@@ -41,7 +41,11 @@ export const StripeWidget = () => {
 			<PaymentElement id="payment-element" />
 			<button disabled={isLoading || !stripe || !elements} id="submit">
 				<span id="button-text">
-					{isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+					{isLoading ? (
+						<div className="spinner" id="spinner"></div>
+					) : (
+						"Оплатить сейчас"
+					)}
 				</span>
 			</button>
 			{message && <div id="payment-message">{message}</div>}

@@ -11,6 +11,23 @@ main {
 	margin: 100px 20px 50px;
 }
 
-.StripeElement {
+#submit {
 	width: 100%;
+}
+
+#button-text {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	color: white;
+	background-color: #429adf;
+	border-radius: 5px;
+	padding: 16px 8px;
+	margin-top: 16px;
+	transition: all 0.1s ease 0s;
+
+	&:hover {
+    background-color: #3582c5;
+  }
 }

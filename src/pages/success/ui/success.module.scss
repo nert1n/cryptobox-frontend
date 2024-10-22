@@ -1,0 +1,31 @@
+.success {
+		&__holder {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+
+			img {
+				width: 50%;
+				max-width: 150px;
+				min-width: 100px;
+        margin-bottom: 20px;
+			}
+
+			h1 {
+				width: 90%;
+				font-size: 24px;
+				font-weight: 700;
+				text-align: center;
+			}
+
+			p {
+				width: 80%;
+				font-size: 16px;
+				font-weight: 400;
+				color: #b4b4b4;
+				text-align: center;
+				margin-top: 8px;
+			}
+		}
+}

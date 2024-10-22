@@ -1,5 +1,5 @@
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { ChangeEvent, useState } from "react";
 
 import { StripeWidget } from "@features/stripeWidget";
@@ -7,7 +7,7 @@ import styles from "@pages/refill/ui/refill.module.scss";
 import UserService from "@shared/api/user.service.ts";
 
 const stripePromise = loadStripe(
-	"pk_test_51OkRe7KsvhRur5TZI1OezYZ1cfRffOeewWByGUPRz5sAGvjQBJY07B1iueIplIXK3VzJI27u5VDGMkqS1U7X7jia002CfMo36a"
+	"pk_test_51OkRe7KsvhRur5TZEd9mpT3gy73mFtfcoLIPLpekJg4og7nVVsbgXyVxrhrgcVgs6xtWcg9l9kF7he9jL6czzDyy00QJ2Q4Cl4"
 );
 
 export const StripeForm = () => {
@@ -35,15 +35,18 @@ export const StripeForm = () => {
 		}
 	};
 
-	const options = {
+	const options: StripeElementsOptions = {
 		clientSecret: secret,
+		appearance: { theme: "night" },
 	};
 
 	return (
 		<div>
 			<p className={styles.refill__desc}>
 				ВАЖНО! Оплата должна проходить строго через сайт и необходимо переводить
-				ровно ту сумму, которую сгенерирует платежная система.
+				ровно ту сумму, которую сгенерирует платежная система. Если вы
+				скопируете номер кошелька и решите пополнить как-то иначе или позже —
+				платеж зачислен не будет.
 			</p>
 
 			{!isNext ? (
