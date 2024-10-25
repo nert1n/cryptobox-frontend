@@ -10,7 +10,8 @@ export const Profile = () => {
 	const [referral, setReferral] = useState(null);
 
 	const [copied, setCopied] = useState(false);
-
+	const tg = window.Telegram?.WebApp;
+	const tgId = tg?.initDataUnsafe?.user?.id;
 	const handleCopy = () => {
 		navigator.clipboard.writeText(`${referral}`);
 		setCopied(true);
@@ -18,9 +19,8 @@ export const Profile = () => {
 	};
 
 	const getReferral = async () => {
-		const tg = window?.Telegram?.WebApp;
-		const tgId = tg?.initDataUnsafe?.user?.id;
 		console.log(tg);
+		console.log(window.Telegram);
 		try {
 			const result = await UserService.postGetRef(tgId ? tgId : 0);
 
