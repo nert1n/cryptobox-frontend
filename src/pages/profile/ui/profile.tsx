@@ -20,14 +20,14 @@ export const Profile = () => {
 	};
 
 	const getReferral = async () => {
-		console.log(userId);
-		if (userId) {
-			try {
-				const result = await UserService.postGetRef(userId);
-				setReferral(result.data.ref);
-			} catch (e) {
-				console.log(e);
-			}
+		try {
+			const result = await UserService.postGetRef(
+				// @ts-ignore
+				window.Telegram.WebApp.initDataUnsafe.user.id
+			);
+			setReferral(result.data.ref);
+		} catch (e) {
+			console.log(e);
 		}
 	};
 
