@@ -21,7 +21,7 @@ export const Profile = () => {
 
 	const getReferral = async () => {
 		console.log(userId);
-		if (userId !== null) {
+		if (userId) {
 			try {
 				const result = await UserService.postGetRef(userId);
 				setReferral(result.data.ref);
