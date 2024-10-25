@@ -1,5 +1,4 @@
 import {
-	LinkAuthenticationElement,
 	PaymentElement,
 	useElements,
 	useStripe,
@@ -37,7 +36,6 @@ export const StripeWidget = () => {
 
 	return (
 		<form id="payment-form" onSubmit={handleSubmit}>
-			<LinkAuthenticationElement id="link-authentication-element" />
 			<PaymentElement id="payment-element" />
 			<button disabled={isLoading || !stripe || !elements} id="submit">
 				<span id="button-text">
