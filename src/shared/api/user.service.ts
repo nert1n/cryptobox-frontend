@@ -8,6 +8,10 @@ export default class UserService {
 			`${BACKEND_URL}/api/ref/getref`,
 			{ chatId: chatId },
 			{
+				headers: {
+					"Content-Type": "application/json",
+					Origin: "https://crypto-drop.netlify.app",
+				},
 				withCredentials: true,
 			}
 		);
