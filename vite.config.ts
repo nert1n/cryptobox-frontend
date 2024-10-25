@@ -1,5 +1,6 @@
 import legacy from "@vitejs/plugin-legacy";
 import react from "@vitejs/plugin-react";
+import fs from "fs";
 import path from "path";
 import { defineConfig } from "vite";
 import compression from "vite-plugin-compression";
@@ -40,11 +41,14 @@ export default defineConfig({
 					"https://4849-2a02-8071-6282-a220-11c8-b93d-532-f391.ngrok-free.app",
 				changeOrigin: true,
 				secure: true,
-				cookieDomainRewrite: "localhost",
 				rewrite: path => path.replace(/^\/api/, ""),
 			},
 		},
 		hmr: { overlay: true },
+		https: {
+			key: fs.readFileSync("server.key"),
+			cert: fs.readFileSync("server.cert"),
+		},
 	},
 	optimizeDeps: { include: ["react", "react-dom"] },
 	build: {
