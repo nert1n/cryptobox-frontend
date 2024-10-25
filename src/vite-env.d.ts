@@ -29,3 +29,21 @@ interface ImportMeta {
 }
 
 export {};
+
+interface TelegramWebAppUser {
+	id: number;
+}
+
+interface TelegramWebApp {
+	initDataUnsafe?: {
+		user?: TelegramWebAppUser;
+	};
+}
+
+declare global {
+	interface Window {
+		Telegram?: {
+			WebApp?: TelegramWebApp;
+		};
+	}
+}

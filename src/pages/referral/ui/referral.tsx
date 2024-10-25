@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { useTelegramUserId } from "@app/providers/telegramProvider";
 import { Cup } from "@entities/cup";
 import { ReferralBlock } from "@entities/referralBlock";
 import UserService from "@shared/api/user.service.ts";
@@ -58,13 +59,16 @@ const currentLevel = 1;
 
 export const Referral = () => {
 	const [referral, setReferral] = useState(null);
+	const userId = useTelegramUserId();
 
 	const getReferral = async () => {
-		try {
-			const result = await UserService.postGetRef(1425448286);
-			setReferral(result.data.ref);
-		} catch (e) {
-			console.log(e);
+		if (userId) {
+			try {
+				const result = await UserService.postGetRef(userId);
+				setReferral(result.data.ref);
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	};
 

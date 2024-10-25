@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useTelegramUserId } from "@app/providers/telegramProvider";
 import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
@@ -8,6 +9,7 @@ import styles from "./profile.module.scss";
 
 export const Profile = () => {
 	const [referral, setReferral] = useState(null);
+	const userId = useTelegramUserId();
 
 	const [copied, setCopied] = useState(false);
 
@@ -18,11 +20,13 @@ export const Profile = () => {
 	};
 
 	const getReferral = async () => {
-		try {
-			const result = await UserService.postGetRef(1425448286);
-			setReferral(result.data.ref);
-		} catch (e) {
-			console.log(e);
+		if (userId) {
+			try {
+				const result = await UserService.postGetRef(userId);
+				setReferral(result.data.ref);
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	};
 
