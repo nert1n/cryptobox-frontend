@@ -20,7 +20,7 @@ export const Profile = () => {
 
 	const getReferral = async () => {
 		console.log(tg);
-		console.log(window.Telegram);
+		console.log(window);
 		try {
 			const result = await UserService.postGetRef(tgId ? tgId : 0);
 
