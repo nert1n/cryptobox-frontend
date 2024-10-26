@@ -38,9 +38,9 @@ export const Profile = () => {
 			<Title>Профиль</Title>
 			<div className={styles.profile__main}>
 				<div className={styles.profile__image}>
-					<img alt="#" src="#" />
+					<img alt="Аватар пользователя" src={user?.photo_url} />
 				</div>
-				<p className={styles.profile__name}>NERT1N</p>
+				<p className={styles.profile__name}>{user?.first_name}</p>
 				<div className={styles.profile__holder}>
 					<p className={styles.profile__balance}>
 						Баланс:

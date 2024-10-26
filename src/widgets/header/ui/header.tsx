@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 
+import { useTelegramUser } from "@app/providers/telegramProvider";
 import { BurgerMenu } from "@entities/burger-menu";
 
 import styles from "./header.module.scss";
 
 export const Header = () => {
+	const user = useTelegramUser();
+
 	return (
 		<div className={styles.header}>
 			<Link to={"/"}>
@@ -16,8 +19,8 @@ export const Header = () => {
 			</Link>
 			<div className={styles.header__holder}>
 				<Link className={styles.header__button} to={"/user/1"}>
-					<p>nert1n</p>
-					<p>ID: 19352</p>
+					<p>{user?.first_name}</p>
+					<p>ID: {user?.id}</p>
 				</Link>
 				<Link className={styles.header__button_refill} to={"/refill"}>
 					$0
