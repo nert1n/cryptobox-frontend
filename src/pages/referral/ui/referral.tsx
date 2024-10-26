@@ -8,45 +8,6 @@ import { Title } from "@shared/ui/title";
 
 import styles from "./referral.module.scss";
 
-const referrals = [
-	{
-		level: 1,
-		count: 0,
-		percent: 2.5,
-		isGain: true,
-	},
-	{
-		level: 2,
-		count: 300,
-		percent: 3,
-		isGain: false,
-	},
-	{
-		level: 3,
-		count: 1000,
-		percent: 7,
-		isGain: false,
-	},
-	{
-		level: 4,
-		count: 2500,
-		percent: 8,
-		isGain: false,
-	},
-	{
-		level: 5,
-		count: 10000,
-		percent: 10,
-		isGain: false,
-	},
-];
-
-const levelList = [
-	{ title: "2.5%", desc: "От пополнения", data: "%" },
-	{ title: "0", desc: "Текущих рефералов", data: "0" },
-	{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
-];
-
 const refList = [
 	{
 		name: "Ваша реферальная ссылка",
@@ -55,21 +16,78 @@ const refList = [
 	},
 ];
 
-const currentLevel = 1;
-
 export const Referral = () => {
-	const [referral, setReferral] = useState(null);
+	const [referral, setReferral] = useState("");
+	const [originCount, setOriginCount] = useState(0);
+	const [currentLevel, setCurrentLevel] = useState(1);
 	const user = useTelegramUser();
+
+	const levelList = [
+		{ title: "2.5%", desc: "От пополнения", data: "%" },
+		{
+			title: `${originCount}}`,
+			desc: "Текущих рефералов",
+			data: { originCount },
+		},
+		{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
+	];
+
+	const referrals = [
+		{
+			level: 1,
+			count: 0,
+			percent: 2.5,
+			isGain: true,
+		},
+		{
+			level: 2,
+			count: 300,
+			percent: 3,
+			isGain: currentLevel >= 2,
+		},
+		{
+			level: 3,
+			count: 1000,
+			percent: 7,
+			isGain: currentLevel >= 3,
+		},
+		{
+			level: 4,
+			count: 2500,
+			percent: 8,
+			isGain: currentLevel >= 4,
+		},
+		{
+			level: 5,
+			count: 10000,
+			percent: 10,
+			isGain: currentLevel >= 5,
+		},
+	];
 
 	const getReferral = async () => {
 		try {
 			const result = await UserService.postGetRef(user?.id ? user.id : 0);
-
+			setOriginCount(result.data.originCount);
 			setReferral(result.data.ref);
 		} catch (e) {
 			console.log(e);
 		}
 	};
+
+	useEffect(() => {
+		if (originCount >= 10000) {
+			setCurrentLevel(5);
+		} else if (originCount >= 2500) {
+			setCurrentLevel(4);
+		} else if (originCount >= 1000) {
+			setCurrentLevel(3);
+		} else if (originCount >= 300) {
+			setCurrentLevel(2);
+		} else {
+			setCurrentLevel(1);
+		}
+	}, [originCount]);
 
 	useEffect(() => {
 		getReferral();
