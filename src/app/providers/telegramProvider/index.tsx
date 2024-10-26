@@ -6,31 +6,39 @@ import {
 	useState,
 } from "react";
 
-const TelegramUserIdContext = createContext<number | null>(null);
+interface TelegramUser {
+	id: number;
+	first_name?: string;
+	last_name?: string;
+	username?: string;
+	language_code?: string;
+}
 
-interface TelegramUserIdProviderProps {
+const TelegramUserContext = createContext<TelegramUser | null>(null);
+
+interface TelegramUserProviderProps {
 	children: ReactNode;
 }
 
-export const TelegramUserIdProvider = ({
+export const TelegramUserProvider = ({
 	children,
-}: TelegramUserIdProviderProps) => {
-	const [userId, setUserId] = useState<number | null>(null);
+}: TelegramUserProviderProps) => {
+	const [user, setUser] = useState<TelegramUser | null>(null);
 
 	useEffect(() => {
 		if (
 			typeof window !== "undefined" &&
-			window.Telegram?.WebApp?.initDataUnsafe?.user?.id
+			window.Telegram?.WebApp?.initDataUnsafe?.user
 		) {
-			setUserId(window.Telegram.WebApp.initDataUnsafe.user.id);
+			setUser(window.Telegram.WebApp.initDataUnsafe.user);
 		}
 	}, []);
 
 	return (
-		<TelegramUserIdContext.Provider value={userId}>
+		<TelegramUserContext.Provider value={user}>
 			{children}
-		</TelegramUserIdContext.Provider>
+		</TelegramUserContext.Provider>
 	);
 };
 
-export const useTelegramUserId = () => useContext(TelegramUserIdContext);
+export const useTelegramUser = () => useContext(TelegramUserContext);

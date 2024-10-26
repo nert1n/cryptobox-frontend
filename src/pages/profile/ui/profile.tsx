@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useTelegramUser } from "@app/providers/telegramProvider";
 import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
@@ -10,8 +11,8 @@ export const Profile = () => {
 	const [referral, setReferral] = useState(null);
 
 	const [copied, setCopied] = useState(false);
-	const tg = window.Telegram?.WebApp;
-	const tgId = tg?.initDataUnsafe?.user?.id;
+	const user = useTelegramUser();
+
 	const handleCopy = () => {
 		navigator.clipboard.writeText(`${referral}`);
 		setCopied(true);
@@ -19,10 +20,8 @@ export const Profile = () => {
 	};
 
 	const getReferral = async () => {
-		console.log(tg);
-		console.log(window);
 		try {
-			const result = await UserService.postGetRef(tgId ? tgId : 0);
+			const result = await UserService.postGetRef(user?.id ? user.id : 0);
 
 			setReferral(result.data.ref);
 		} catch (e) {

@@ -1,9 +1,9 @@
-import { TelegramUserIdProvider } from "@app/providers/telegramProvider";
+import { TelegramUserProvider } from "@app/providers/telegramProvider";
 
 import { IProviders } from "./providers.interface";
 
 const Providers = ({ children }: IProviders) => {
-	return <TelegramUserIdProvider>{children}</TelegramUserIdProvider>;
+	return <TelegramUserProvider>{children}</TelegramUserProvider>;
 };
 
 export default Providers;
