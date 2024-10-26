@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-	useTelegramUser,
-	useTelegramUserId,
-} from "@app/providers/telegramProvider";
+import { useTelegramUser } from "@app/providers/telegramProvider";
 import { Cup } from "@entities/cup";
 import { ReferralBlock } from "@entities/referralBlock";
 import UserService from "@shared/api/user.service.ts";
