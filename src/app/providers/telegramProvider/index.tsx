@@ -25,7 +25,7 @@ export const TelegramUserProvider = ({
 	children,
 }: TelegramUserProviderProps) => {
 	const [user, setUser] = useState<TelegramUser | null>(null);
-
+	console.log(user);
 	useEffect(() => {
 		if (
 			typeof window !== "undefined" &&

@@ -61,9 +61,9 @@ export const Referral = () => {
 	const levelList = [
 		{ title: `${currentPercent}`, desc: "От пополнения", data: "%" },
 		{
-			title: `${originCount}}`,
+			title: `${originCount}`,
 			desc: "Текущих рефералов",
-			data: { originCount },
+			data: `${originCount}`,
 		},
 		{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
 	];
