@@ -8,8 +8,9 @@ import { Title } from "@shared/ui/title";
 import styles from "./profile.module.scss";
 
 export const Profile = () => {
-	const [referral, setReferral] = useState(null);
-
+	const [referral, setReferral] = useState("");
+	const [balance, setBalance] = useState(0);
+	const [openedCases, setOpenedCases] = useState(0);
 	const [copied, setCopied] = useState(false);
 	const user = useTelegramUser();
 
@@ -29,8 +30,32 @@ export const Profile = () => {
 		}
 	};
 
+	const getBalance = async () => {
+		try {
+			const result = await UserService.postGetBalance(user?.id ? user.id : 0);
+
+			setBalance(result.data.balance);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	const getOpenedCases = async () => {
+		try {
+			const result = await UserService.postGetOpenedCases(
+				user?.id ? user.id : 0
+			);
+
+			setOpenedCases(result.data.opened);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
 	useEffect(() => {
 		getReferral();
+		getBalance();
+		getOpenedCases();
 	}, []);
 
 	return (
@@ -47,9 +72,9 @@ export const Profile = () => {
 				<div className={styles.profile__holder}>
 					<p className={styles.profile__balance}>
 						Баланс:
-						<span>$0</span>
+						<span>${balance}</span>
 					</p>
-					<Link className={styles.profile__balance_plus} to={"/referral"}>
+					<Link className={styles.profile__balance_plus} to={"/refill"}>
 						<svg
 							fill="none"
 							height="12"
@@ -72,7 +97,7 @@ export const Profile = () => {
 				<div className={styles.profile__cases}>
 					<img alt="Case" src="/images/case.svg" />
 					<div className={styles.profile__text}>
-						<p>_</p>
+						<p>{openedCases}</p>
 						<p>КЕЙСОВ</p>
 					</div>
 				</div>

@@ -1,22 +1,38 @@
 import { useState } from "react";
 
+import { useTelegramUser } from "@app/providers/telegramProvider";
 import { Coin } from "@entities/coin";
 import { ICaseOpen } from "@features/caseOpen/model/types";
+import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./case-open.module.scss";
 
-const coins = [
-	{ name: "ETH", cost: 128.46, image: "eth", count: 0.05, color: "blue" },
-	{ name: "SOL", cost: 1.54, image: "sol", count: 0.01, color: "purple" },
-];
-
-export const CaseOpen = ({ caseName }: ICaseOpen) => {
+export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
 	const [activeNumber, setActiveNumber] = useState(1);
-	const cost = 14;
+
+	const user = useTelegramUser();
 
 	const handleSelectNumber = (number: number) => {
 		setActiveNumber(number);
+	};
+
+	const openCase = async () => {
+		try {
+			const result = await UserService.postOpenCase(
+				user?.id ? user.id : 0,
+				caseInfo.caseName,
+				activeNumber
+			);
+
+			if (result.data.success) {
+				alert("Кейс открыт!");
+			} else {
+				alert("Недостаточно средств!");
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	return (
@@ -26,10 +42,12 @@ export const CaseOpen = ({ caseName }: ICaseOpen) => {
 					<img
 						alt="Case"
 						className={styles.case__open_image}
-						src={`/images/cases/${caseName}.png`}
+						src={`/images/cases/${caseInfo}.png`}
 					/>
 				</div>
-				<p className={styles.case__open_cost}>$ {cost * activeNumber}.00</p>
+				<p className={styles.case__open_cost}>
+					$ {caseInfo.caseCost * activeNumber}.00
+				</p>
 			</div>
 			<div className={styles.case__count}>
 				<p className={styles.case__count_title}>Открыть раз</p>
@@ -72,16 +90,19 @@ export const CaseOpen = ({ caseName }: ICaseOpen) => {
 					</button>
 				</div>
 			</div>
-			<button className={`${styles.case__button} ${styles.case__button_first}`}>
+			<button
+				className={`${styles.case__button} ${styles.case__button_first}`}
+				onClick={() => openCase()}>
 				Открыть кейс
 			</button>
 			<button
-				className={`${styles.case__button} ${styles.case__button_second}`}>
+				className={`${styles.case__button} ${styles.case__button_second}`}
+				onClick={() => openCase()}>
 				Открыть быстро
 			</button>
 			<Title>Содержимое кейса</Title>
 			<div className={styles.case__holder}>
-				{coins.map(coin => (
+				{caseInfo.coins.map(coin => (
 					<Coin
 						key={coin.name}
 						coinColor={coin.color}

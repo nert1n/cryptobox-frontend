@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
+
 import { Case } from "@entities/case";
+import UserService from "@shared/api/user.service.ts";
 
 import styles from "./case-holder.module.scss";
 
-const CASES = [
+interface CaseType {
+	id: number;
+	cost: number;
+	name: string;
+	link: string;
+}
+
+const CASES: CaseType[] = [
 	{
 		id: 1,
 		cost: 7,
@@ -42,16 +52,41 @@ const CASES = [
 ];
 
 export const CaseHolder = () => {
+	const [cases, setCases] = useState<CaseType[]>();
+
+	const getCases = async () => {
+		try {
+			const result = await UserService.getCases();
+
+			setCases(result.data.cases);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	useEffect(() => {
+		getCases();
+	}, []);
+
 	return (
 		<div className={styles.holder}>
-			{CASES.map(cases => (
-				<Case
-					key={cases.id}
-					cost={cases.cost}
-					link={cases.link}
-					name={cases.name}
-				/>
-			))}
+			{cases
+				? cases.map(cases => (
+						<Case
+							key={cases.id}
+							cost={cases.cost}
+							link={cases.link}
+							name={cases.name}
+						/>
+					))
+				: CASES.map(cases => (
+						<Case
+							key={cases.id}
+							cost={cases.cost}
+							link={cases.link}
+							name={cases.name}
+						/>
+					))}
 		</div>
 	);
 };

@@ -22,16 +22,6 @@ export const Referral = () => {
 	const [currentLevel, setCurrentLevel] = useState(1);
 	const user = useTelegramUser();
 
-	const levelList = [
-		{ title: "2.5%", desc: "От пополнения", data: "%" },
-		{
-			title: `${originCount}}`,
-			desc: "Текущих рефералов",
-			data: { originCount },
-		},
-		{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
-	];
-
 	const referrals = [
 		{
 			level: 1,
@@ -63,6 +53,19 @@ export const Referral = () => {
 			percent: 10,
 			isGain: currentLevel >= 5,
 		},
+	];
+
+	const currentPercent =
+		referrals.find(ref => ref.level === currentLevel)?.percent || 0;
+
+	const levelList = [
+		{ title: `${currentPercent}`, desc: "От пополнения", data: "%" },
+		{
+			title: `${originCount}}`,
+			desc: "Текущих рефералов",
+			data: { originCount },
+		},
+		{ title: "0.00$", desc: "Мой заработок от рефералов", data: "$" },
 	];
 
 	const getReferral = async () => {
