@@ -9,7 +9,7 @@ import styles from "./main-layout.module.scss";
 
 export const MainLayout = () => {
 	const user = useTelegramUser();
-	console.log(user);
+
 	if (user === null) {
 		return (
 			<main className={styles.layout}>
