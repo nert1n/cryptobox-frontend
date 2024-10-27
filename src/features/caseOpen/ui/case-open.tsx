@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTelegramUser } from "@app/providers/telegramProvider";
 import { Coin } from "@entities/coin";
 import { ICaseOpen } from "@features/caseOpen/model/types";
-import UserService from "@shared/api/user.service.ts";
+import CasesService from "@shared/api/cases.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./case-open.module.scss";
@@ -19,7 +19,7 @@ export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
 
 	const openCase = async () => {
 		try {
-			const result = await UserService.postOpenCase(
+			const result = await CasesService.postOpenCase(
 				user?.id ? user.id : 0,
 				caseInfo.caseName,
 				activeNumber

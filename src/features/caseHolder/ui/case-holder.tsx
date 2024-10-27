@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Case } from "@entities/case";
-import UserService from "@shared/api/user.service.ts";
+import CasesService from "@shared/api/cases.service.ts";
 
 import styles from "./case-holder.module.scss";
 
@@ -56,7 +56,7 @@ export const CaseHolder = () => {
 
 	const getCases = async () => {
 		try {
-			const result = await UserService.getCases();
+			const result = await CasesService.getCases();
 
 			setCases(result.data.cases);
 		} catch (e) {

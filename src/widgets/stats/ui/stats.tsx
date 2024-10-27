@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import UserService from "@shared/api/user.service.ts";
+import MainService from "@shared/api/main.service.ts";
 
 import styles from "./stats.module.scss";
 
@@ -16,7 +16,7 @@ export const Stats = () => {
 
 	const getStatsData = async () => {
 		try {
-			const result = await UserService.getStatsData();
+			const result = await MainService.getStatsData();
 
 			setStatsData(result.data.data);
 		} catch (e) {

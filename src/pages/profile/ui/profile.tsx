@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useTelegramUser } from "@app/providers/telegramProvider";
+import CasesService from "@shared/api/cases.service.ts";
 import UserService from "@shared/api/user.service.ts";
 import { Title } from "@shared/ui/title";
 
@@ -42,7 +43,7 @@ export const Profile = () => {
 
 	const getOpenedCases = async () => {
 		try {
-			const result = await UserService.postGetOpenedCases(
+			const result = await CasesService.postGetOpenedCases(
 				user?.id ? user.id : 0
 			);
 

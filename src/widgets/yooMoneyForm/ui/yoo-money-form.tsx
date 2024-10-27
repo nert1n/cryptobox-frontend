@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 
 import { YooMoneyWidget } from "@features/yooMoneyWidget";
 import styles from "@pages/refill/ui/refill.module.scss";
-import UserService from "@shared/api/user.service.ts";
+import PaymentService from "@shared/api/payment.service.ts";
 
 export const YooMoneyForm = () => {
 	const [amount, setAmount] = useState(0);
@@ -10,7 +10,7 @@ export const YooMoneyForm = () => {
 
 	const handlePayment = async () => {
 		try {
-			const response = await UserService.postCreatePaymentYooMoney(amount);
+			const response = await PaymentService.postCreatePaymentYooMoney(amount);
 
 			if (
 				response.data.confirmation &&

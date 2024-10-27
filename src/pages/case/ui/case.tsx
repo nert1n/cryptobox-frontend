@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 import { CaseOpen } from "@features/caseOpen";
-import UserService from "@shared/api/user.service.ts";
+import CasesService from "@shared/api/cases.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./case.module.scss";
@@ -29,7 +29,7 @@ export const Case = () => {
 
 	const getCases = async () => {
 		try {
-			const result = await UserService.getCaseData(caseName);
+			const result = await CasesService.getCaseData(caseName);
 
 			setCaseInfo(result.data.caseInfo);
 		} catch (e) {

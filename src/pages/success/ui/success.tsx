@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-import UserService from "@shared/api/user.service.ts";
+import PaymentService from "@shared/api/payment.service.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./success.module.scss";
@@ -26,7 +26,7 @@ export const Success = () => {
 	useEffect(() => {
 		if (paymentIntent && status === "succeeded") {
 			try {
-				const result = UserService.postSuccessPayment(paymentIntent, status);
+				const result = PaymentService.postSuccessPayment(paymentIntent, status);
 
 				console.log(result);
 			} catch (e) {

@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 
 import { StripeWidget } from "@features/stripeWidget";
 import styles from "@pages/refill/ui/refill.module.scss";
-import UserService from "@shared/api/user.service.ts";
+import PaymentService from "@shared/api/payment.service.ts";
 
 const stripePromise = loadStripe(
 	"pk_test_51OkRe7KsvhRur5TZEd9mpT3gy73mFtfcoLIPLpekJg4og7nVVsbgXyVxrhrgcVgs6xtWcg9l9kF7he9jL6czzDyy00QJ2Q4Cl4"
@@ -23,7 +23,7 @@ export const StripeForm = () => {
 
 	const handlePayment = async () => {
 		try {
-			const response = await UserService.postCreatePaymentStripe(amount);
+			const response = await PaymentService.postCreatePaymentStripe(amount);
 			if (response.data.client_secret) {
 				setSecret(response.data.client_secret);
 				setIsNext(true);
