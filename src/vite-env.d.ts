@@ -28,8 +28,6 @@ interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }
 
-export {};
-
 interface TelegramWebAppUser {
 	id: number;
 }
@@ -47,3 +45,11 @@ declare global {
 		};
 	}
 }
+
+declare global {
+	interface Window {
+		YooMoneyCheckoutWidget: any;
+	}
+}
+
+export {};

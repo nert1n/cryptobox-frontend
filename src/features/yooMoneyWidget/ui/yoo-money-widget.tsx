@@ -11,8 +11,8 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 
 		script.onload = () => {
 			setTimeout(() => {
-				if (window.YooMoney) {
-					const widget = new window.YooMoney.Checkout({
+				if (window.YooMoneyCheckoutWidget) {
+					const widget = new window.YooMoneyCheckoutWidget.Checkout({
 						amount: {
 							value: amount,
 							currency: "RUB",
