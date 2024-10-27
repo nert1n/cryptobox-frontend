@@ -5,13 +5,12 @@ import { IYooMoneyWidget } from "@features/yooMoneyWidget/model/types.ts";
 export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 	useEffect(() => {
 		const script = document.createElement("script");
-		script.src = "https://yoomoney.ru/javascripts/checkout.js";
+		script.src = "https://yookassa.ru/checkout-widget/v1/checkout-widget.js";
 		script.async = true;
-		script.crossOrigin = "anonymous"; // додано для кросс-доменної підтримки
+		script.crossOrigin = "anonymous";
 
 		script.onload = () => {
 			setTimeout(() => {
-				// додано відтермінування
 				if (window.YooMoney) {
 					const widget = new window.YooMoney.Checkout({
 						amount: {
