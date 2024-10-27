@@ -16,7 +16,7 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 				},
 				confirmation: {
 					type: "redirect",
-					return_url: "https://crypto-drop-rouge.vercel.app/payment-success",
+					return_url: "https://crypto-drop.netlify.app/refill/success",
 				},
 				capture: true,
 				description: "Оплата заказа",

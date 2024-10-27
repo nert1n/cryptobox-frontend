@@ -67,6 +67,7 @@ export const YooMoneyForm = () => {
 				платежа.
 			</p>
 			{isNext && <YooMoneyWidget amount={amount} />}
+			<YooMoneyWidget amount={23332} />
 		</div>
 	);
 };
