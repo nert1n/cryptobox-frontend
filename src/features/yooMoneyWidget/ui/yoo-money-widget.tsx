@@ -9,6 +9,8 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 		script.async = true;
 		script.crossOrigin = "anonymous";
 
+		console.log(window.YooMoneyCheckoutWidget);
+
 		script.onload = () => {
 			setTimeout(() => {
 				if (window.YooMoneyCheckoutWidget) {
