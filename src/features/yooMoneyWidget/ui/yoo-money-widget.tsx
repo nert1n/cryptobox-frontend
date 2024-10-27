@@ -7,22 +7,29 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 		const script = document.createElement("script");
 		script.src = "https://yoomoney.ru/javascripts/checkout.js";
 		script.async = true;
+		script.crossOrigin = "anonymous"; // додано для кросс-доменної підтримки
 
 		script.onload = () => {
-			const widget = new window.YooMoney.Checkout({
-				amount: {
-					value: amount,
-					currency: "RUB",
-				},
-				confirmation: {
-					type: "redirect",
-					return_url: "https://crypto-drop.netlify.app/refill/success",
-				},
-				capture: true,
-				description: "Оплата заказа",
-			});
-
-			widget.render("#yoo-money-widget");
+			setTimeout(() => {
+				// додано відтермінування
+				if (window.YooMoney) {
+					const widget = new window.YooMoney.Checkout({
+						amount: {
+							value: amount,
+							currency: "RUB",
+						},
+						confirmation: {
+							type: "redirect",
+							return_url: "https://crypto-drop.netlify.app/refill/success",
+						},
+						capture: true,
+						description: "Оплата заказа",
+					});
+					widget.render("#yoo-money-widget");
+				} else {
+					console.error("YooMoney не завантажено");
+				}
+			}, 1000);
 		};
 
 		document.body.appendChild(script);
