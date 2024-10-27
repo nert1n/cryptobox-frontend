@@ -7,30 +7,25 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 		const script = document.createElement("script");
 		script.src = "https://yookassa.ru/checkout-widget/v1/checkout-widget.js";
 		script.async = true;
-		script.crossOrigin = "anonymous";
-
-		console.log(window.YooMoneyCheckoutWidget);
 
 		script.onload = () => {
-			setTimeout(() => {
-				if (window.YooMoneyCheckoutWidget) {
-					const widget = new window.YooMoneyCheckoutWidget.Checkout({
-						amount: {
-							value: amount,
-							currency: "RUB",
-						},
-						confirmation: {
-							type: "redirect",
-							return_url: "https://crypto-drop.netlify.app/refill/success",
-						},
-						capture: true,
-						description: "Оплата заказа",
-					});
-					widget.render("#yoo-money-widget");
-				} else {
-					console.error("YooMoney не завантажено");
-				}
-			}, 1000);
+			if (window.YooMoneyCheckoutWidget) {
+				const widget = new window.YooMoneyCheckoutWidget.Checkout({
+					amount: {
+						value: amount,
+						currency: "RUB",
+					},
+					confirmation: {
+						type: "redirect",
+						return_url: "https://crypto-drop.netlify.app/refill/success",
+					},
+					capture: true,
+					description: "Оплата заказа",
+				});
+				widget.render("#yoo-money-widget");
+			} else {
+				console.error("YooMoney не завантажено");
+			}
 		};
 
 		document.body.appendChild(script);
