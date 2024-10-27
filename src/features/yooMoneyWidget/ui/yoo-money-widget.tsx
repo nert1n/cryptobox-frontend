@@ -9,8 +9,9 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 		script.async = true;
 
 		script.onload = () => {
-			if (window.YooMoneyCheckoutWidget) {
-				const widget = new window.YooMoneyCheckoutWidget.Checkout({
+			const YooMoneyWidget = window.YooMoneyCheckoutWidget;
+			if (YooMoneyWidget && YooMoneyWidget.Checkout) {
+				const widget = YooMoneyWidget.Checkout({
 					amount: {
 						value: amount,
 						currency: "RUB",
@@ -24,7 +25,7 @@ export const YooMoneyWidget = ({ amount }: IYooMoneyWidget) => {
 				});
 				widget.render("#yoo-money-widget");
 			} else {
-				console.error("YooMoney не завантажено");
+				console.error("YooMoney не завантажено або Checkout недоступний");
 			}
 		};
 
