@@ -4,15 +4,13 @@ import { BACKEND_URL } from "@shared/const/originUrl/backend-url";
 
 export default class CasesService {
 	static async getCases() {
-		const res = await axios.get(`${BACKEND_URL}/api/getcases`, {
-			withCredentials: true,
-		});
+		const res = await axios.get(`${BACKEND_URL}/api/cases/getcasesamount`);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
 	static async getCaseData(name: string) {
 		const res = await axios.post(
-			`${BACKEND_URL}/api/getcase`,
-			{ caseName: name },
+			`${BACKEND_URL}/api/cases/getcase`,
+			{ tableName: name },
 			{
 				withCredentials: true,
 			}
@@ -21,8 +19,8 @@ export default class CasesService {
 	}
 	static async postGetOpenedCases(chatId: number) {
 		const res = await axios.post(
-			`${BACKEND_URL}/api/opened`,
-			{ chatId: chatId },
+			`${BACKEND_URL}/api/cases/getamountfromcase`,
+			{ tableName: chatId },
 			{
 				withCredentials: true,
 			}
