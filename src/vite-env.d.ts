@@ -52,4 +52,6 @@ declare global {
 	}
 }
 
+declare module "yookassa-widget";
+
 export {};

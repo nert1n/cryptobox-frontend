@@ -37,7 +37,7 @@ export default defineConfig({
 		proxy: {
 			"/api": {
 				target:
-					"https://a632-2a02-8071-6282-a220-1821-6a97-883-130a.ngrok-free.app",
+					"https://3cbb-2a02-8071-6282-a220-d0de-2c99-79ec-7b93.ngrok-free.app/",
 				changeOrigin: true,
 				secure: true,
 				cookieDomainRewrite: "localhost",

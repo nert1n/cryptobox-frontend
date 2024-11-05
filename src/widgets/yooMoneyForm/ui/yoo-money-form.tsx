@@ -1,12 +1,13 @@
 import { ChangeEvent, useState } from "react";
 
-import { YooMoneyWidget } from "@features/yooMoneyWidget";
+import PaymentForm from "@features/yooMoneyWidget/yoo-money-widget.tsx";
 import styles from "@pages/refill/ui/refill.module.scss";
 import PaymentService from "@shared/api/payment.service.ts";
 
 export const YooMoneyForm = () => {
 	const [amount, setAmount] = useState(0);
 	const [isNext, setIsNext] = useState(false);
+	const [confirmationToken, setConfirmationToken] = useState(0);
 
 	const handlePayment = async () => {
 		try {
@@ -14,8 +15,9 @@ export const YooMoneyForm = () => {
 
 			if (
 				response.data.confirmation &&
-				response.data.confirmation.confirmation_url
+				response.data.confirmation.confirmation_token
 			) {
+				setConfirmationToken(response.data.confirmation.confirmation_token);
 				setIsNext(true);
 			} else {
 				setIsNext(false);
@@ -39,35 +41,44 @@ export const YooMoneyForm = () => {
 				скопируете номер кошелька и решите пополнить как-то иначе или позже —
 				платеж зачислен не будет.
 			</p>
-			<div className={styles.input}>
-				<p className={styles.input__title}>
-					Enter amount&nbsp;
-					<span>(MIN: ₽150, MAX: ₽1,000,000)</span>
-				</p>
-				<div className={styles.input__holder}>
-					<p className={styles.input__cost}>₽</p>
-					<input
-						className={styles.input__text}
-						placeholder="Введите сумму"
-						type="number"
-						value={amount}
-						onChange={handleInputChange}
-					/>
-				</div>
-			</div>
-			<button className={styles.refill__button} onClick={handlePayment}>
-				Оплатить
-			</button>
-			<p className={styles.refill__text}>
-				Для пополнения баланса вы будете перемещены на сайт платежной системы.{" "}
-			</p>
-			<p className={styles.refill__text}>
-				Баланс на сайте пополняется моментально, но если этого не произошло в
-				течение часа, напишите нам в Telegram @CryptoDropSupport, указав данные
-				платежа.
-			</p>
-			{isNext && <YooMoneyWidget amount={amount} />}
-			<YooMoneyWidget amount={23332} />
+
+			{!isNext ? (
+				<>
+					<div className={styles.input}>
+						<p className={styles.input__title}>
+							Enter amount&nbsp;
+							<span>(MIN: ₽150, MAX: ₽1,000,000)</span>
+						</p>
+						<div className={styles.input__holder}>
+							<p className={styles.input__cost}>₽</p>
+							<input
+								className={styles.input__text}
+								placeholder="Введите сумму"
+								type="number"
+								value={amount}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>
+					<button className={styles.refill__button} onClick={handlePayment}>
+						Оплатить
+					</button>
+					<p className={styles.refill__text}>
+						Для пополнения баланса вы будете перемещены на сайт платежной
+						системы.
+					</p>
+					<p className={styles.refill__text}>
+						Баланс на сайте пополняется моментально, но если этого не произошло
+						в течение часа, напишите нам в Telegram @CryptoDropSupport, указав
+						данные платежа.
+					</p>
+				</>
+			) : (
+				<PaymentForm
+					confToken={confirmationToken}
+					onComplete={() => alert("Payment accepted")}
+				/>
+			)}
 		</div>
 	);
 };
