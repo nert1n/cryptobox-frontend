@@ -6,41 +6,42 @@ export default class PaymentService {
 	static async postCreatePaymentYooMoney(amount: number) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/createrubpayment`,
-			{ amount: amount },
+			{ amount: `${amount}` },
 			{
 				withCredentials: true,
 			}
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postCapturePaymentYooMoney(
-		id: number,
-		userId: string,
-		status: string
-	) {
+	static async postCapturePaymentYooMoney(id: number) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/capturerubpayment`,
-			{ id: id, userId: userId, status: status },
+			{ paymentId: id },
 			{
 				withCredentials: true,
 			}
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postCreatePaymentStripe(amount: number) {
+	static async postCreatePaymentStripe(amount: number, email: string) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/createstripepayment`,
-			{ amount: amount, currency: "usd", userId: 6822709019 },
+			{
+				amount: amount,
+				currency: "usd",
+				email: email,
+				userId: 6822709019,
+			},
 			{
 				withCredentials: true,
 			}
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postSuccessPayment(paymentIntent: string, status: string) {
+	static async postSuccessPayment(paymentIntent: string) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/updatestripepayment`,
-			{ paymentIntent: paymentIntent, status: status },
+			{ paymentId: paymentIntent, email: "dymufa@gmail.com" },
 			{
 				withCredentials: true,
 			}

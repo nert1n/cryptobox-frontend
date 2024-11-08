@@ -12,18 +12,27 @@ const stripePromise = loadStripe(
 
 export const StripeForm = () => {
 	const [amount, setAmount] = useState(0);
+	const [email, setEmail] = useState("");
 	const [isNext, setIsNext] = useState(false);
 	const [secret, setSecret] = useState("");
 
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleInputAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		const numberValue = value ? parseFloat(value) : 0;
 		setAmount(numberValue);
 	};
 
+	const handleInputEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setEmail(value);
+	};
+
 	const handlePayment = async () => {
 		try {
-			const response = await PaymentService.postCreatePaymentStripe(amount);
+			const response = await PaymentService.postCreatePaymentStripe(
+				amount,
+				email
+			);
 			if (response.data.client_secret) {
 				setSecret(response.data.client_secret);
 				setIsNext(true);
@@ -52,6 +61,18 @@ export const StripeForm = () => {
 			{!isNext ? (
 				<>
 					<div className={styles.input}>
+						<p className={styles.input__title}>Enter email address</p>
+						<div className={styles.input__holder}>
+							<input
+								className={styles.input__text}
+								placeholder="Введите почту"
+								type="email"
+								value={email}
+								onChange={handleInputEmailChange}
+							/>
+						</div>
+					</div>
+					<div className={styles.input}>
 						<p className={styles.input__title}>
 							Enter amount&nbsp;
 							<span>(MIN: $1.5, MAX: $10,000)</span>
@@ -63,7 +84,7 @@ export const StripeForm = () => {
 								placeholder="Введите сумму"
 								type="number"
 								value={amount}
-								onChange={handleInputChange}
+								onChange={handleInputAmountChange}
 							/>
 						</div>
 					</div>

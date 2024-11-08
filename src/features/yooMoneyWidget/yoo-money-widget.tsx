@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
 
-import { useTelegramUser } from "@app/providers/telegramProvider";
 import PaymentService from "@shared/api/payment.service.ts";
 
 export default function PaymentForm({
 	confToken,
 	onComplete,
+	paymentId,
 }: {
 	confToken: number;
+	paymentId: number;
 	onComplete: () => void;
 }) {
 	const paymentFormRef = useRef(true);
-	const user = useTelegramUser();
 
 	useEffect(() => {
 		if (paymentFormRef.current) {
@@ -30,6 +30,12 @@ export default function PaymentForm({
 	const initializeWidget = () => {
 		const checkout = new window.YooMoneyCheckoutWidget({
 			confirmation_token: confToken,
+			customization: {
+				colors: {
+					control_primary: "#2c9eff",
+					background: "#363636",
+				},
+			},
 			error_callback: function (error: Error) {
 				console.log(error);
 			},
@@ -41,20 +47,12 @@ export default function PaymentForm({
 		});
 
 		checkout.on("success", () => {
-			PaymentService.postCapturePaymentYooMoney(
-				confToken,
-				user?.id ? `${user?.id}` : "",
-				"success"
-			);
+			PaymentService.postCapturePaymentYooMoney(paymentId);
 			checkout.destroy();
 		});
 
 		checkout.on("fail", () => {
-			PaymentService.postCapturePaymentYooMoney(
-				confToken,
-				user?.id ? `${user?.id}` : "",
-				"failed"
-			);
+			PaymentService.postCapturePaymentYooMoney(paymentId);
 			checkout.destroy();
 		});
 

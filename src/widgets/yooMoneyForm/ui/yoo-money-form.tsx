@@ -6,8 +6,10 @@ import PaymentService from "@shared/api/payment.service.ts";
 
 export const YooMoneyForm = () => {
 	const [amount, setAmount] = useState(0);
+	const [email, setEmail] = useState("");
 	const [isNext, setIsNext] = useState(false);
 	const [confirmationToken, setConfirmationToken] = useState(0);
+	const [paymentId, setPaymentId] = useState(0);
 
 	const handlePayment = async () => {
 		try {
@@ -18,6 +20,7 @@ export const YooMoneyForm = () => {
 				response.data.confirmation.confirmation_token
 			) {
 				setConfirmationToken(response.data.confirmation.confirmation_token);
+				setPaymentId(response.data.id);
 				setIsNext(true);
 			} else {
 				setIsNext(false);
@@ -27,10 +30,15 @@ export const YooMoneyForm = () => {
 		}
 	};
 
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleInputAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		const numberValue = value ? parseFloat(value) : 0;
 		setAmount(numberValue);
+	};
+
+	const handleInputEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setEmail(value);
 	};
 
 	return (
@@ -45,6 +53,18 @@ export const YooMoneyForm = () => {
 			{!isNext ? (
 				<>
 					<div className={styles.input}>
+						<p className={styles.input__title}>Enter email address</p>
+						<div className={styles.input__holder}>
+							<input
+								className={styles.input__text}
+								placeholder="Введите почту"
+								type="email"
+								value={email}
+								onChange={handleInputEmailChange}
+							/>
+						</div>
+					</div>
+					<div className={styles.input}>
 						<p className={styles.input__title}>
 							Enter amount&nbsp;
 							<span>(MIN: ₽150, MAX: ₽1,000,000)</span>
@@ -56,7 +76,7 @@ export const YooMoneyForm = () => {
 								placeholder="Введите сумму"
 								type="number"
 								value={amount}
-								onChange={handleInputChange}
+								onChange={handleInputAmountChange}
 							/>
 						</div>
 					</div>
@@ -76,6 +96,7 @@ export const YooMoneyForm = () => {
 			) : (
 				<PaymentForm
 					confToken={confirmationToken}
+					paymentId={paymentId}
 					onComplete={() => alert("Payment accepted")}
 				/>
 			)}
