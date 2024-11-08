@@ -82,7 +82,7 @@ export const StripeForm = ({ value }: { value: string }) => {
 						<p className={styles.input__title}>
 							Enter amount&nbsp;
 							<span>
-								(MIN: {value}1.5, MAX: {value}10,000)
+								(MIN: {value}0.60, MAX: {value}10,000)
 							</span>
 						</p>
 						<div className={styles.input__holder}>
