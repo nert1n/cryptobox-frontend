@@ -13,7 +13,10 @@ export const YooMoneyForm = () => {
 
 	const handlePayment = async () => {
 		try {
-			const response = await PaymentService.postCreatePaymentYooMoney(amount);
+			const response = await PaymentService.postCreatePaymentYooMoney(
+				amount,
+				email
+			);
 
 			if (
 				response.data.confirmation &&

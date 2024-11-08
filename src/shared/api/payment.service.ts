@@ -3,10 +3,10 @@ import axios from "axios";
 import { BACKEND_URL } from "@shared/const/originUrl/backend-url";
 
 export default class PaymentService {
-	static async postCreatePaymentYooMoney(amount: number) {
+	static async postCreatePaymentYooMoney(amount: number, email: string) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/createrubpayment`,
-			{ amount: `${amount}` },
+			{ amount: `${amount}`, email: email },
 			{
 				withCredentials: true,
 			}
