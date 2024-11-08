@@ -26,7 +26,7 @@ export const Success = () => {
 	useEffect(() => {
 		if (paymentIntent && status === "succeeded") {
 			try {
-				const result = PaymentService.postSuccessPayment(paymentIntent, status);
+				const result = PaymentService.postSuccessPayment(paymentIntent);
 
 				console.log(result);
 			} catch (e) {
