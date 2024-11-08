@@ -7,7 +7,7 @@ import { YooMoneyForm } from "@widgets/yooMoneyForm";
 import styles from "./refill.module.scss";
 
 export const Refill = () => {
-	const [isYooMoney, setIsYooMoney] = useState(true);
+	const [currency, setCurrency] = useState(1);
 
 	return (
 		<div className={styles.refill}>
@@ -16,19 +16,27 @@ export const Refill = () => {
 				<p className={styles.refill__title}>Пополнение баланса</p>
 				<div className={styles.refill__holder}>
 					<button
-						className={`${styles.refill__select} ${isYooMoney ? styles.active : ""}`}
+						className={`${styles.refill__select} ${currency === 1 ? styles.active : ""}`}
 						type={"button"}
-						onClick={() => setIsYooMoney(true)}>
+						onClick={() => setCurrency(1)}>
 						₽ - Rubbles
 					</button>
 					<button
-						className={`${styles.refill__select} ${!isYooMoney ? styles.active : ""}`}
+						className={`${styles.refill__select} ${currency === 2 ? styles.active : ""}`}
 						type={"button"}
-						onClick={() => setIsYooMoney(false)}>
+						onClick={() => setCurrency(2)}>
 						$ - Dollars
 					</button>
+					<button
+						className={`${styles.refill__select} ${currency === 3 ? styles.active : ""}`}
+						type={"button"}
+						onClick={() => setCurrency(3)}>
+						€ - Euro
+					</button>
 				</div>
-				{isYooMoney ? <YooMoneyForm /> : <StripeForm />}
+				{currency === 1 && <YooMoneyForm />}
+				{currency === 2 && <StripeForm value={"$"} />}
+				{currency === 3 && <StripeForm value={"€"} />}
 			</div>
 		</div>
 	);

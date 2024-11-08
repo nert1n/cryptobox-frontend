@@ -7,10 +7,10 @@ import styles from "@pages/refill/ui/refill.module.scss";
 import PaymentService from "@shared/api/payment.service.ts";
 
 const stripePromise = loadStripe(
-	"pk_test_51OkRe7KsvhRur5TZEd9mpT3gy73mFtfcoLIPLpekJg4og7nVVsbgXyVxrhrgcVgs6xtWcg9l9kF7he9jL6czzDyy00QJ2Q4Cl4"
+	"pk_live_51OkRe7KsvhRur5TZCDvfyucQzqav9u8uRaYQP6UmWVVaOV5x8lUvuwgg7p9qKo5JA9Q9PtgGA3ecZ14kWMQml8Hz00rTYG9LQA"
 );
 
-export const StripeForm = () => {
+export const StripeForm = ({ value }: { value: string }) => {
 	const [amount, setAmount] = useState(0);
 	const [email, setEmail] = useState("");
 	const [isNext, setIsNext] = useState(false);
@@ -29,8 +29,14 @@ export const StripeForm = () => {
 
 	const handlePayment = async () => {
 		try {
+			let currency = "usd";
+			if (value === "€") {
+				currency = "eur";
+			}
+
 			const response = await PaymentService.postCreatePaymentStripe(
 				amount,
+				currency,
 				email
 			);
 			if (response.data.client_secret) {
@@ -75,10 +81,12 @@ export const StripeForm = () => {
 					<div className={styles.input}>
 						<p className={styles.input__title}>
 							Enter amount&nbsp;
-							<span>(MIN: $1.5, MAX: $10,000)</span>
+							<span>
+								(MIN: {value}1.5, MAX: {value}10,000)
+							</span>
 						</p>
 						<div className={styles.input__holder}>
-							<p className={styles.input__cost}>$</p>
+							<p className={styles.input__cost}>{value}</p>
 							<input
 								className={styles.input__text}
 								placeholder="Введите сумму"

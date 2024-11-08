@@ -23,12 +23,16 @@ export default class PaymentService {
 		);
 		return { data: res.data, status: res.status, statusText: res.statusText };
 	}
-	static async postCreatePaymentStripe(amount: number, email: string) {
+	static async postCreatePaymentStripe(
+		amount: number,
+		currency: string,
+		email: string
+	) {
 		const res = await axios.post(
 			`${BACKEND_URL}/api/payments/createstripepayment`,
 			{
 				amount: amount,
-				currency: "usd",
+				currency: currency,
 				email: email,
 				userId: 6822709019,
 			},
