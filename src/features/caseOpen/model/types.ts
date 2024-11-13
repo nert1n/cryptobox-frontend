@@ -1,17 +1,12 @@
-interface ICoin {
+export interface ICoin {
 	name: string;
+	id: number;
+	amount: number;
 	cost: number;
-	image: string;
-	count: number;
+	network: string;
 	color: string;
 }
 
-interface ICaseInfo {
-	caseName: string;
-	caseCost: number;
+export interface ICaseInfo {
 	coins: ICoin[];
-}
-
-export interface ICaseOpen {
-	caseInfo: ICaseInfo;
 }

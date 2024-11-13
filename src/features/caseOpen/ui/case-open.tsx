@@ -1,27 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 import { useTelegramUser } from "@app/providers/telegramProvider";
 import { Coin } from "@entities/coin";
-import { ICaseOpen } from "@features/caseOpen/model/types";
+import { ICoin } from "@features/caseOpen/model/types.ts";
 import CasesService from "@shared/api/cases.service.ts";
+import { CASES } from "@shared/const/cases.ts";
 import { Title } from "@shared/ui/title";
 
 import styles from "./case-open.module.scss";
 
-export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
+export const CaseOpen = () => {
 	const [activeNumber, setActiveNumber] = useState(1);
+	const [coins, setCoins] = useState<ICoin[] | undefined>();
 
 	const user = useTelegramUser();
+	const { pathname } = useLocation();
+
+	const caseName = pathname.replace("/case/", "");
+	const caseNameApi = caseName.replace(/-/g, "_");
+
+	const getCostByLink = (link: string): number | undefined => {
+		const foundCase = CASES.find(caseItem => caseItem.link === link);
+		return foundCase ? foundCase.cost : undefined;
+	};
 
 	const handleSelectNumber = (number: number) => {
 		setActiveNumber(number);
+	};
+
+	const getCases = async () => {
+		try {
+			const result = await CasesService.getCaseData(caseNameApi);
+			setCoins(result.data.response);
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	const openCase = async () => {
 		try {
 			const result = await CasesService.postOpenCase(
 				user?.id ? user.id : 0,
-				caseInfo.caseName,
+				caseNameApi,
 				activeNumber
 			);
 
@@ -35,6 +56,10 @@ export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
 		}
 	};
 
+	useEffect(() => {
+		getCases();
+	}, []);
+
 	return (
 		<div className={styles.case}>
 			<div className={styles.case__open}>
@@ -42,52 +67,29 @@ export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
 					<img
 						alt="Case"
 						className={styles.case__open_image}
-						src={`/images/cases/${caseInfo}.png`}
+						src={`/images/cases/${caseName}.png`}
 					/>
 				</div>
 				<p className={styles.case__open_cost}>
-					$ {caseInfo.caseCost * activeNumber}.00
+					${" "}
+					{getCostByLink(caseName)
+						? getCostByLink(caseName)! * activeNumber
+						: 0}
+					.00
 				</p>
 			</div>
 			<div className={styles.case__count}>
 				<p className={styles.case__count_title}>Открыть раз</p>
 				<div className={styles.case__count_holder}>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 1 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(1)}>
-						x1
-					</button>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 2 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(2)}>
-						x2
-					</button>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 3 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(3)}>
-						x3
-					</button>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 4 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(4)}>
-						x4
-					</button>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 5 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(5)}>
-						x5
-					</button>
-					<button
-						className={`${styles.case__count_select} ${activeNumber === 10 ? styles.active : ""}`}
-						type={"button"}
-						onClick={() => handleSelectNumber(10)}>
-						x10
-					</button>
+					{[1, 2, 3, 4, 5, 10].map(number => (
+						<button
+							key={number}
+							className={`${styles.case__count_select} ${activeNumber === number ? styles.active : ""}`}
+							type="button"
+							onClick={() => handleSelectNumber(number)}>
+							x{number}
+						</button>
+					))}
 				</div>
 			</div>
 			<button
@@ -102,16 +104,17 @@ export const CaseOpen = ({ caseInfo }: ICaseOpen) => {
 			</button>
 			<Title>Содержимое кейса</Title>
 			<div className={styles.case__holder}>
-				{caseInfo.coins.map(coin => (
-					<Coin
-						key={coin.name}
-						coinColor={coin.color}
-						coinCost={coin.cost}
-						coinCount={coin.count}
-						coinImage={coin.image}
-						coinName={coin.name}
-					/>
-				))}
+				{coins &&
+					coins.map(coin => (
+						<Coin
+							key={coin.name}
+							coinColor={coin.color}
+							coinCost={coin.cost}
+							coinCount={coin.amount}
+							coinImage={coin.name.toLowerCase()}
+							coinName={coin.name}
+						/>
+					))}
 			</div>
 		</div>
 	);
