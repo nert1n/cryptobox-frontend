@@ -12,7 +12,6 @@ export const CaseHolder = () => {
 	const getCases = async () => {
 		try {
 			const result = await CasesService.getCases();
-			console.log(result);
 			setCases(result.data.cases);
 		} catch (e) {
 			console.log(e);

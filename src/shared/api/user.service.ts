@@ -5,8 +5,8 @@ import { BACKEND_URL } from "@shared/const/originUrl/backend-url";
 export default class UserService {
 	static async postGetBalance(chatId: number) {
 		const res = await axios.post(
-			`${BACKEND_URL}/api/balance`,
-			{ chatId: chatId },
+			`${BACKEND_URL}/api/user/balance`,
+			{ id: chatId },
 			{
 				withCredentials: true,
 			}
