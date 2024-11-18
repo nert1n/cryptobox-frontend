@@ -9,7 +9,7 @@ export const Footer = () => {
 				src="/images/logo.png"
 			/>
 			<p className={styles.footer__terms}>
-				© 2024 CryptoDrop — ловите криптовалюту с неба{" "}
+				© 2024 CryptoBox — ловите криптовалюту с неба{" "}
 			</p>
 			<div className={styles.footer__text}>
 				<p>На нашем сайте вы можете открыть</p>

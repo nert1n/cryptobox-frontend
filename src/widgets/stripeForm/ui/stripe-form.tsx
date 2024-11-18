@@ -105,7 +105,7 @@ export const StripeForm = ({ value }: { value: string }) => {
 					</p>
 					<p className={styles.refill__text}>
 						Баланс на сайте пополняется моментально, но если этого не произошло
-						в течение часа, напишите нам в Telegram @CryptoDropSupport.
+						в течение часа, напишите нам в Telegram @CryptoBoxSupport.
 					</p>
 				</>
 			) : (

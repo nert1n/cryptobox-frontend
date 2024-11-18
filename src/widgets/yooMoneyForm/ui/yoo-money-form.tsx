@@ -92,7 +92,7 @@ export const YooMoneyForm = () => {
 					</p>
 					<p className={styles.refill__text}>
 						Баланс на сайте пополняется моментально, но если этого не произошло
-						в течение часа, напишите нам в Telegram @CryptoDropSupport, указав
+						в течение часа, напишите нам в Telegram @CryptoBoxSupport, указав
 						данные платежа.
 					</p>
 				</>
