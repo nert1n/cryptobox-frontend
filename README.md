@@ -1,3 +1,2 @@
-# crypto-drop
+# cryptodrop-frontend
 
-Freelance site crypto drop
